@@ -6,6 +6,16 @@ import torch.nn.functional as F
 import importlib
 
 
+def get_model(model, input_channels=3, pretrained=False):
+    if model == 'resnet50_md':
+        out_model = Resnet50_md(input_channels)
+    elif model == 'resnet18_md':
+        out_model = Resnet18_md(input_channels)
+    else:
+        out_model = ResnetModel(input_channels, encoder=model, pretrained=pretrained)
+    return out_model
+
+
 class conv(nn.Module):
     def __init__(self, num_in_layers, num_out_layers, kernel_size, stride):
         super(conv, self).__init__()
